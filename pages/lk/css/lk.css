@@ -1,0 +1,278 @@
+/* ===========================
+   Личный кабинет — общие стили
+   =========================== */
+
+.lk {
+    padding: 40px 0 80px;
+    min-height: calc(100vh - 68px);
+}
+
+.lk__header {
+    margin-bottom: 32px;
+}
+
+.lk__title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+}
+
+.lk__subtitle {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}
+
+/* Табы */
+.lk__tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: 32px;
+}
+
+.lk__tab {
+    padding: 12px 24px;
+    background: none;
+    border: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all var(--transition);
+    font-family: inherit;
+}
+
+.lk__tab:hover {
+    color: var(--color-text);
+}
+
+.lk__tab.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+/* Панели */
+.lk__panel {
+    display: none;
+}
+
+.lk__panel.active {
+    display: block;
+}
+
+.lk__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.lk__panel-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.lk__empty {
+    text-align: center;
+    padding: 64px 24px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+}
+
+/* Список резюме */
+.resumes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.resume-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: all var(--transition);
+}
+
+.resume-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.resume-card__info {
+    flex: 1;
+}
+
+.resume-card__specialization {
+    font-weight: 600;
+    font-size: 1.0625rem;
+    margin-bottom: 4px;
+}
+
+.resume-card__meta {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.resume-card__status {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    margin-top: 6px;
+}
+
+.resume-card__status--public {
+    background-color: #ECFDF5;
+    color: #065F46;
+}
+
+.resume-card__status--hidden {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+.resume-card__actions {
+    display: flex;
+    gap: 8px;
+}
+
+.resume-card__actions button {
+    padding: 8px 14px;
+    font-size: 0.8125rem;
+}
+
+/* Чекбокс */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+/* ===========================
+   Модальное окно
+   =========================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+.modal__content {
+    position: relative;
+    z-index: 1;
+    background-color: var(--color-white);
+    border-radius: var(--radius);
+    padding: 32px;
+    width: 90%;
+    max-width: 520px;
+    margin: 60px auto 0;
+    box-shadow: var(--shadow-lg);
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.modal__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.modal__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    padding: 4px;
+    border-radius: 4px;
+    transition: color var(--transition);
+}
+
+.modal__close:hover {
+    color: var(--color-text);
+}
+
+.modal__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+/* ===========================
+   Адаптив
+   =========================== */
+@media (max-width: 768px) {
+    .lk__tabs {
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    .lk__tab {
+        flex: 1;
+        text-align: center;
+        padding: 12px 8px;
+        font-size: 0.8125rem;
+    }
+
+    .resume-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .resume-card__actions {
+        align-self: flex-end;
+    }
+
+    .modal__content {
+        margin: 20px auto;
+        padding: 24px;
+        width: 95%;
+    }
+}

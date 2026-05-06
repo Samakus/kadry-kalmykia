@@ -1,0 +1,7 @@
+.env
+node_modules/
+data/users.json
+data/resumes.json
+data/vacancies.json
+data/responses.json
+data/contacts.json

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет работодателя — Кадровый центр РК</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="css/lk.css">
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../../index.html" class="logo">
+                <span class="logo__icon">
+                    <img src="../../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                </span>
+                <span class="logo__text">Кадровый центр</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="../vacancies.html" class="nav__link">Вакансии</a>
+                <a href="../organizations.html" class="nav__link">Организации</a>
+                <a href="#" class="nav__link" id="userNameDisplay">Работодатель</a>
+                <a href="#" class="btn btn--outline nav__btn" id="logoutBtn">Выйти</a>
+            </nav>
+            <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Личный кабинет -->
+    <main class="lk">
+        <div class="container">
+
+            <div class="lk__header">
+                <h1 class="lk__title">Личный кабинет работодателя</h1>
+                <p class="lk__subtitle" id="userGreeting">Добро пожаловать!</p>
+            </div>
+
+            <div class="lk__tabs">
+                <button class="lk__tab active" data-tab="vacancies">Мои вакансии</button>
+                <button class="lk__tab" data-tab="resumes">База резюме</button>
+                <button class="lk__tab" data-tab="responses">Отклики</button>
+            </div>
+
+            <!-- Вкладка: Мои вакансии -->
+            <div class="lk__panel active" id="panel-vacancies">
+                <div class="lk__toolbar">
+                    <h2 class="lk__panel-title">Мои вакансии</h2>
+                    <button class="btn btn--primary" id="createVacancyBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Добавить вакансию
+                    </button>
+                </div>
+                <div class="resumes-list" id="myVacanciesList"></div>
+                <div class="lk__empty" id="vacanciesEmpty" style="display: none;">
+                    <p>У вас пока нет вакансий. Добавьте первую.</p>
+                </div>
+            </div>
+
+            <!-- Вкладка: База резюме -->
+            <div class="lk__panel" id="panel-resumes">
+                <div class="lk__toolbar">
+                    <h2 class="lk__panel-title">База резюме</h2>
+                </div>
+                <div class="search-bar">
+                    <div class="input-group">
+                        <input type="text" id="resumeSearch" placeholder=" ">
+                        <label for="resumeSearch">Поиск по специализации</label>
+                    </div>
+                </div>
+                <div class="resumes-list" id="allResumesList"></div>
+                <div class="lk__empty" id="resumesEmpty" style="display: none;">
+                    <p>Нет доступных резюме.</p>
+                </div>
+            </div>
+
+            <!-- Вкладка: Отклики -->
+            <div class="lk__panel" id="panel-responses">
+                <div class="lk__toolbar">
+                    <h2 class="lk__panel-title">Отклики на мои вакансии</h2>
+                </div>
+                <div class="responses-list" id="employerResponsesList"></div>
+                <div class="lk__empty" id="employerResponsesEmpty" style="display: none;">
+                    <p>Пока нет откликов.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Модальное окно: создание/редактирование вакансии -->
+    <div class="modal" id="vacancyModal">
+        <div class="modal__overlay" id="modalOverlay"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 class="modal__title" id="modalTitle">Новая вакансия</h3>
+                <button class="modal__close" id="modalClose">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="vacancyForm">
+                <input type="hidden" id="vacancyId">
+                <div class="input-group">
+                    <input type="text" id="vacancyTitle" placeholder=" " required>
+                    <label for="vacancyTitle">Название должности</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="vacancySpecialization" placeholder=" " required>
+                    <label for="vacancySpecialization">Специализация</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="vacancySalary" placeholder=" " required>
+                    <label for="vacancySalary">Зарплата</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="vacancyConditions" placeholder=" " required>
+                    <label for="vacancyConditions">Условия работы</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="vacancyRequirements" placeholder=" " required>
+                    <label for="vacancyRequirements">Требования</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="vacancyPhone" placeholder=" " required>
+                    <label for="vacancyPhone">Контактный телефон</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="vacancyEmail" placeholder=" " required>
+                    <label for="vacancyEmail">Контактный email</label>
+                </div>
+                <div class="modal__actions">
+                    <button type="button" class="btn btn--secondary" id="modalCancel">Отмена</button>
+                    <button type="submit" class="btn btn--primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="../../js/main.js"></script>
+    <script src="js/employer.js"></script>
+
+</body>
+</html>

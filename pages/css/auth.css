@@ -1,0 +1,232 @@
+/* ===========================
+   Страница входа и регистрации
+   =========================== */
+
+.auth-page {
+    min-height: calc(100vh - 68px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+}
+
+.auth-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 48px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-primary-light);
+    border-radius: var(--radius-sm);
+    margin: 0 auto 20px;
+}
+
+.auth-card__icon svg {
+    color: var(--color-primary);
+}
+
+.auth-card__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.auth-card__subtitle {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.auth-card .input-group {
+    margin-bottom: 20px;
+}
+
+.auth-card__footer {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+}
+
+.auth-card__footer a {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.auth-card__footer a:hover {
+    text-decoration: underline;
+}
+
+/* Ошибка */
+.auth-error {
+    background-color: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: #DC2626;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.auth-error.visible {
+    display: block;
+}
+
+/* Адаптив */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 32px 24px;
+    }
+}
+
+/* ===========================
+   Выбор роли (радиокнопки-карточки)
+   =========================== */
+.role-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.role-option input[type="radio"] {
+    display: none;
+}
+
+.role-option__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition);
+    text-align: center;
+}
+
+.role-option__card:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-light);
+}
+
+.role-option input[type="radio"]:checked + .role-option__card {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-light);
+    box-shadow: 0 0 0 3px rgba(30, 95, 220, 0.15);
+}
+
+.role-option__icon {
+    color: var(--color-text-secondary);
+    transition: color var(--transition);
+}
+
+.role-option input[type="radio"]:checked + .role-option__card .role-option__icon {
+    color: var(--color-primary);
+}
+
+.role-option__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+/* ===========================
+   Select (выбор организации)
+   =========================== */
+.input-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    font-family: inherit;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2364748B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 44px;
+}
+
+.input-group select:focus {
+    border-color: var(--color-primary);
+}
+
+/* ===========================
+   Сообщение об успехе
+   =========================== */
+.auth-success {
+    text-align: center;
+    padding: 48px 24px;
+}
+
+.auth-success__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+}
+
+.auth-success__icon svg {
+    color: var(--color-accent);
+}
+
+.auth-success__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.auth-success__text {
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+}
+
+@media (max-width: 400px) {
+    .role-selector {
+        grid-template-columns: 1fr;
+    }
+}
+
+.auth-card__forgot {
+    display: block;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+.auth-card__forgot:hover {
+    text-decoration: underline;
+}
+
+.auth-card__back {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+}

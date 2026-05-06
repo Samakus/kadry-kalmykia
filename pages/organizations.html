@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Организации — Кадровый центр здравоохранения РК</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/organizations.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../index.html" class="logo">
+                <span class="logo__icon">
+                    <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                </span>
+                <span class="logo__text">Кадровый центр</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="vacancies.html" class="nav__link">Вакансии</a>
+                <a href="organizations.html" class="nav__link">Организации</a>
+                <a href="documents.html" class="nav__link">Документы</a>
+                <a href="press.html" class="nav__link">Пресс-служба</a>
+                <a href="login.html" class="btn btn--outline nav__btn" id="authBtn">Войти</a>
+            </nav>
+            <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Медицинские учреждения</h1>
+                <p>Государственные учреждения здравоохранения Республики Калмыкия</p>
+                <div class="filters">
+                    <select id="filterType">
+                        <option value="">Все типы</option>
+                    </select>
+                    <select id="filterCity">
+                        <option value="">Все населенные пункты</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--results">
+            <div class="container">
+                <div class="orgs-full-grid" id="orgsGrid">
+                    <p>Загрузка...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__col">
+                <div class="logo logo--footer">
+                    <span class="logo__icon">
+                        <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                    </span>
+                    <span class="logo__text">Кадровый центр</span>
+                </div>
+                <p class="footer__text">Кадровый центр здравоохранения<br>Республики Калмыкия</p>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Навигация</h4>
+                <a href="vacancies.html" class="footer__link">Вакансии</a>
+                <a href="organizations.html" class="footer__link">Организации</a>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Контакты</h4>
+                <p class="footer__link">+7(999)999-99-99</p>
+                <p class="footer__link">kadrykalmykia@gmail.com</p>
+                <p class="footer__link">г. Элиста, ул.Пушкина, 52</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="js/organizations.js"></script>
+
+</body>
+
+</html>

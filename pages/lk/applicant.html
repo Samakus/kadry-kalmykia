@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет соискателя — Кадровый центр РК</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="css/lk.css">
+</head>
+
+<body>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../../index.html" class="logo">
+                <span class="logo__icon">
+                    <img src="../../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                </span>
+                <span class="logo__text">Кадровый центр</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="../vacancies.html" class="nav__link">Вакансии</a>
+                <a href="../organizations.html" class="nav__link">Организации</a>
+                <a href="#" class="nav__link" id="userNameDisplay">Соискатель</a>
+                <a href="#" class="btn btn--outline nav__btn" id="logoutBtn">Выйти</a>
+            </nav>
+            <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Личный кабинет -->
+    <main class="lk">
+        <div class="container">
+
+            <!-- Заголовок и табы -->
+            <div class="lk__header">
+                <h1 class="lk__title">Личный кабинет</h1>
+                <p class="lk__subtitle" id="userGreeting">Добро пожаловать!</p>
+            </div>
+
+            <div class="lk__tabs">
+                <button class="lk__tab active" data-tab="resumes">Мои резюме</button>
+                <button class="lk__tab" data-tab="vacancies">Доступные вакансии</button>
+                <button class="lk__tab" data-tab="responses">Отклики</button>
+            </div>
+
+            <!-- Вкладка: Мои резюме -->
+            <div class="lk__panel active" id="panel-resumes">
+                <div class="lk__toolbar">
+                    <h2 class="lk__panel-title">Мои резюме</h2>
+                    <button class="btn btn--primary" id="createResumeBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Создать резюме
+                    </button>
+                </div>
+                <div class="resumes-list" id="resumesList">
+                    <!-- Заполняется из JS -->
+                </div>
+                <div class="lk__empty" id="resumesEmpty" style="display: none;">
+                    <p>У вас пока нет резюме. Создайте первое, чтобы работодатели могли вас найти.</p>
+                </div>
+            </div>
+
+            <!-- Вкладка: Доступные вакансии -->
+            <div class="lk__panel" id="panel-vacancies">
+                <div class="lk__toolbar">
+                    <h2 class="lk__panel-title">Доступные вакансии</h2>
+                </div>
+                <div class="vacancies-grid" id="lkVacanciesList">
+                    <!-- Заполняется из JS -->
+                </div>
+            </div>
+
+            <!-- Вкладка: Отклики -->
+            <div class="lk__panel" id="panel-responses">
+                <div class="lk__toolbar">
+                    <h2 class="lk__panel-title">Мои отклики</h2>
+                </div>
+                <div class="responses-list" id="myResponsesList"></div>
+                <div class="lk__empty" id="responsesEmpty" style="display: none;">
+                    <p>У вас пока нет откликов. Найдите подходящую вакансию и откликнитесь на неё.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Модальное окно: создание/редактирование резюме -->
+    <div class="modal" id="resumeModal">
+        <div class="modal__overlay" id="modalOverlay"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 class="modal__title" id="modalTitle">Новое резюме</h3>
+                <button class="modal__close" id="modalClose">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="resumeForm">
+                <input type="hidden" id="resumeId">
+                <div class="input-group">
+                    <input type="text" id="resumeSpecialization" placeholder=" " required>
+                    <label for="resumeSpecialization">Специализация</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="resumeEducation" placeholder=" " required>
+                    <label for="resumeEducation">Образование</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="resumeExperience" placeholder=" " required>
+                    <label for="resumeExperience">Опыт работы</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="resumeCertificates" placeholder=" ">
+                    <label for="resumeCertificates">Сертификаты (через запятую)</label>
+                </div>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="resumeIsPublic" checked>
+                    <span>Резюме видно работодателям</span>
+                </label>
+                <div class="modal__actions">
+                    <button type="button" class="btn btn--secondary" id="modalCancel">Отмена</button>
+                    <button type="submit" class="btn btn--primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="../../js/main.js"></script>
+    <script src="js/applicant.js"></script>
+
+</body>
+
+</html>
