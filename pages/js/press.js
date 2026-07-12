@@ -43,6 +43,11 @@ function renderNews(newsList) {
             <h2 class="news-article__title">${news.title}</h2>
             <p class="news-article__date">${news.date}</p>
             
+            ${news.image ? `
+                <div class="news-article__image">
+                    <img src="${news.image}" alt="${news.title}" style="width:100%;max-width:720px;border-radius:12px;">
+                </div>
+            ` : ''}
             ${news.video ? `
                 <div class="news-article__video">
                     <video controls style="width:100%;max-width:720px;border-radius:12px;">

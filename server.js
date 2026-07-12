@@ -598,6 +598,36 @@ app.get('/api/news', (req, res) => {
     res.json(news);
 });
 
+app.get('/api/contacts-page', (req, res) => {
+    const data = readJSON('contacts-page.json');
+    res.json(data);
+});
+
+app.get('/api/goals', (req, res) => {
+    const data = readJSON('goals.json');
+    res.json(data);
+});
+
+app.get('/api/mentoring', (req, res) => {
+    const data = readJSON('mentoring.json');
+    res.json(data);
+});
+
+app.get('/api/employment-help', (req, res) => {
+    const data = readJSON('employment-help.json');
+    res.json(data);
+});
+
+app.get('/api/zemstvo', (req, res) => {
+    const data = readJSON('zemstvo.json');
+    res.json(data);
+});
+
+app.get('/api/target-training', (req, res) => {
+    const data = readJSON('target-training.json');
+    res.json(data);
+});
+
 // ==================== ЗАПУСК ====================
 
 app.listen(PORT, () => {

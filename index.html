@@ -28,8 +28,18 @@
             <nav class="nav" id="mainNav">
                 <a href="pages/vacancies.html" class="nav__link">Вакансии</a>
                 <a href="pages/organizations.html" class="nav__link">Организации</a>
-                <a href="pages/documents.html" class="nav__link">Документы</a>
                 <a href="pages/press.html" class="nav__link">Пресс-служба</a>
+                <div class="nav__dropdown">
+                    <span class="nav__link nav__dropdown-toggle">Информация</span>
+                    <div class="nav__dropdown-menu">
+                        <a href="pages/documents.html" class="nav__dropdown-item">Документы</a>
+                        <a href="pages/employment-help.html" class="nav__dropdown-item">Помощь в трудоустройстве</a>
+                        <a href="pages/target-training.html" class="nav__dropdown-item">Целевое обучение</a>
+                        <a href="pages/zemstvo.html" class="nav__dropdown-item">Земский доктор</a>
+                        <a href="pages/contacts.html" class="nav__dropdown-item">Контакты</a>
+                        <a href="pages/mentoring.html" class="nav__dropdown-item">Наставничество</a>
+                    </div>
+                </div>
                 <a href="pages/login.html" class="btn btn--outline nav__btn" id="authBtn">Войти</a>
             </nav>
             <button class="burger" id="burgerBtn" aria-label="Открыть меню">
@@ -86,6 +96,18 @@
             </div>
         </section>
 
+        <!-- Цели центра -->
+        <section class="section section--light">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Цели центра</h2>
+                </div>
+                <div class="goals-grid" id="goalsList">
+                    <!-- Заполняется из JSON -->
+                </div>
+            </div>
+        </section>
+
         <!-- Последние вакансии -->
         <section class="section">
             <div class="container">
@@ -106,6 +128,46 @@
             </div>
         </section>
 
+        <!-- Помощь в трудоустройстве -->
+        <section class="section section--light">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Помощь в трудоустройстве</h2>
+                    <a href="pages/employment-help.html" class="section__link">
+                        Все программы
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <div class="goals-grid" id="employmentHelpGrid">
+                    <!-- Заполняется из JSON -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Последние наставники -->
+        <section class="section section--light">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Наставники</h2>
+                    <a href="pages/mentoring.html" class="section__link">
+                        Все наставники
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <div class="mentoring-grid" id="latestMentors">
+                    <!-- Заполняется из JSON -->
+                </div>
+            </div>
+        </section>
+
         <!-- Организации -->
         <section class="section section--light">
             <div class="container">
@@ -121,6 +183,26 @@
                     </a>
                 </div>
                 <div class="orgs-grid" id="organizationsList">
+                    <!-- Заполняется из JSON -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Новости -->
+        <section class="section">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Новости</h2>
+                    <a href="pages/press.html" class="section__link">
+                        Все новости
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <div class="news-grid" id="latestNews">
                     <!-- Заполняется из JSON -->
                 </div>
             </div>

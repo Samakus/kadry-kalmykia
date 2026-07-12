@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Земский доктор — Кадровый центр здравоохранения РК</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../index.html" class="logo">
+                <span class="logo__icon">
+                    <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                </span>
+                <span class="logo__text">Кадровый центр</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="vacancies.html" class="nav__link">Вакансии</a>
+                <a href="organizations.html" class="nav__link">Организации</a>
+                <a href="press.html" class="nav__link">Пресс-служба</a>
+                <div class="nav__dropdown">
+                    <span class="nav__link nav__dropdown-toggle">Информация</span>
+                    <div class="nav__dropdown-menu">
+                        <a href="documents.html" class="nav__dropdown-item">Документы</a>
+                        <a href="employment-help.html" class="nav__dropdown-item">Помощь в трудоустройстве</a>
+                        <a href="target-training.html" class="nav__dropdown-item">Целевое обучение</a>
+                        <a href="zemstvo.html" class="nav__dropdown-item">Земский доктор</a>
+                        <a href="contacts.html" class="nav__dropdown-item">Контакты</a>
+                        <a href="mentoring.html" class="nav__dropdown-item">Наставничество</a>
+                    </div>
+                </div>
+                <a href="login.html" class="btn btn--outline nav__btn" id="authBtn">Войти</a>
+            </nav>
+            <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Заголовок -->
+        <section class="section">
+            <div class="container">
+                <div class="section__header">
+                    <h1 class="section__title">Земский доктор / Земский фельдшер</h1>
+                </div>
+
+                <div class="mentoring-info" style="margin-bottom:24px">
+                    <p style="font-size:1.0625rem;line-height:1.7;margin:0 0 12px 0">
+                        Программа единовременных компенсационных выплат медицинским работникам,
+                        прибывшим на работу в сельские населённые пункты, посёлки городского типа
+                        либо города с населением до 50 тысяч человек.
+                    </p>
+                    <p style="font-size:0.9375rem;color:var(--color-text-secondary);line-height:1.6;margin:0">
+                        На основании приказа Минздрава РК от 18.03.2025 №239пр
+                        «Об утверждении программного реестра должностей на 2026 год».
+                    </p>
+                </div>
+
+                <!-- Сводка -->
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:32px"
+                    id="summaryCards"></div>
+
+                <!-- Таблица должностей -->
+                <div id="registryTable"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__col">
+                <div class="logo logo--footer">
+                    <span class="logo__icon">
+                        <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                    </span>
+                    <span class="logo__text">Кадровый центр</span>
+                </div>
+                <p class="footer__text">Кадровый центр здравоохранения<br>Республики Калмыкия</p>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Навигация</h4>
+                <a href="vacancies.html" class="footer__link">Вакансии</a>
+                <a href="organizations.html" class="footer__link">Организации</a>
+                <a href="documents.html" class="footer__link">Документы</a>
+                <a href="press.html" class="footer__link">Пресс-служба</a>
+                <a href="contacts.html" class="footer__link">Контакты</a>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Контакты</h4>
+                <p class="footer__link">+7(961)843-88-03</p>
+                <p class="footer__link">kadrykalmykia@gmail.com</p>
+                <p class="footer__link">г. Элиста, ул.Пушкина, 52</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const res = await fetch('/api/zemstvo');
+            const data = await res.json();
+
+            // Сводная статистика
+            let totalPositions = 0;
+            let totalDoctors = 0;
+            let totalNurses = 0;
+            let totalOrgs = data.length;
+            let totalPayment = 0;
+
+            data.forEach(org => {
+                org.positions.forEach(p => {
+                    totalPositions++;
+                    totalPayment += p.payment;
+                    if (p.position.toLowerCase().includes('врач')) totalDoctors++;
+                    else totalNurses++;
+                });
+            });
+
+            document.getElementById('summaryCards').innerHTML = [
+                { label: 'Организаций', value: totalOrgs, color: '#1E5FDC' },
+                { label: 'Вакантных должностей', value: totalPositions, color: '#10B981' },
+                { label: 'Врачей', value: totalDoctors, color: '#E67E22' },
+                { label: 'Средний медперсонал', value: totalNurses, color: '#9B59B6' },
+                { label: 'Общий фонд выплат', value: totalPayment.toFixed(1) + ' млн ₽', color: '#E74C3C' }
+            ].map(c => `
+                <div style="background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius);padding:20px;text-align:center;border-top:3px solid ${c.color}">
+                    <div style="font-size:1.75rem;font-weight:700;color:${c.color};margin-bottom:4px">${c.value}</div>
+                    <div style="font-size:0.8125rem;color:var(--color-text-secondary)">${c.label}</div>
+                </div>
+            `).join('');
+
+            // Таблица
+            const rows = data.map(org => {
+                const posRows = org.positions.map((p, i) => `
+                    <tr style="border-bottom:1px solid var(--color-border)">
+                        ${i === 0 ? `<td rowspan="${org.positions.length}" style="font-weight:600;vertical-align:top;padding:12px;background:#F8FAFC">${org.organization}</td>` : ''}
+                        <td style="padding:10px 12px;font-size:0.875rem;color:var(--color-text-secondary)">${p.department}</td>
+                        <td style="padding:10px 12px;font-size:0.875rem">${p.position}</td>
+                        <td style="padding:10px 12px;text-align:center;font-weight:600;color:${p.payment >= 1.5 ? '#E67E22' : '#10B981'}">${p.payment} млн ₽</td>
+                    </tr>
+                `).join('');
+                return posRows;
+            }).join('');
+
+            document.getElementById('registryTable').innerHTML = `
+                <div style="overflow-x:auto;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius)">
+                    <table style="width:100%;border-collapse:collapse">
+                        <thead>
+                            <tr style="background:var(--color-primary);color:#fff">
+                                <th style="padding:14px 12px;text-align:left;font-weight:600;font-size:0.875rem">Медицинская организация</th>
+                                <th style="padding:14px 12px;text-align:left;font-weight:600;font-size:0.875rem">Структурное подразделение</th>
+                                <th style="padding:14px 12px;text-align:left;font-weight:600;font-size:0.875rem">Должность</th>
+                                <th style="padding:14px 12px;text-align:center;font-weight:600;font-size:0.875rem;white-space:nowrap">Сумма выплаты</th>
+                            </tr>
+                        </thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                </div>
+                <p style="margin-top:16px;font-size:0.8125rem;color:var(--color-text-secondary);text-align:right">
+                    Итого: ${totalPositions} должностей (врачей — ${totalDoctors}, средний медперсонал — ${totalNurses})
+                </p>
+            `;
+        });
+    </script>
+</body>
+
+</html>

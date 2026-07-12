@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помощь в трудоустройстве — Кадровый центр здравоохранения РК</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../index.html" class="logo">
+                <span class="logo__icon">
+                    <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                </span>
+                <span class="logo__text">Кадровый центр</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="vacancies.html" class="nav__link">Вакансии</a>
+                <a href="organizations.html" class="nav__link">Организации</a>
+                <a href="press.html" class="nav__link">Пресс-служба</a>
+                <div class="nav__dropdown">
+                    <span class="nav__link nav__dropdown-toggle">Информация</span>
+                    <div class="nav__dropdown-menu">
+                        <a href="documents.html" class="nav__dropdown-item">Документы</a>
+                        <a href="employment-help.html" class="nav__dropdown-item">Помощь в трудоустройстве</a>
+                        <a href="target-training.html" class="nav__dropdown-item">Целевое обучение</a>
+                        <a href="zemstvo.html" class="nav__dropdown-item">Земский доктор</a>
+                        <a href="contacts.html" class="nav__dropdown-item">Контакты</a>
+                        <a href="mentoring.html" class="nav__dropdown-item">Наставничество</a>
+                    </div>
+                </div>
+                <a href="login.html" class="btn btn--outline nav__btn" id="authBtn">Войти</a>
+            </nav>
+            <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section__header">
+                    <h1 class="section__title">Помощь в трудоустройстве</h1>
+                </div>
+
+                <!-- Баннер-описание -->
+                <div class="mentoring-info" style="margin-bottom:36px">
+                    <p style="font-size:1.0625rem;line-height:1.7;margin:0">
+                        Кадровый центр здравоохранения Республики Калмыкия помогает медицинским работникам найти работу,
+                        пройти обучение и получить государственную поддержку. Ознакомьтесь с основными программами
+                        содействия трудоустройству в сфере здравоохранения.
+                    </p>
+                </div>
+
+                <!-- Карточки программ -->
+                <div id="helpCards" style="display:flex;flex-direction:column;gap:28px"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__col">
+                <div class="logo logo--footer">
+                    <span class="logo__icon">
+                        <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                    </span>
+                    <span class="logo__text">Кадровый центр</span>
+                </div>
+                <p class="footer__text">Кадровый центр здравоохранения<br>Республики Калмыкия</p>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Навигация</h4>
+                <a href="vacancies.html" class="footer__link">Вакансии</a>
+                <a href="organizations.html" class="footer__link">Организации</a>
+                <a href="documents.html" class="footer__link">Документы</a>
+                <a href="press.html" class="footer__link">Пресс-служба</a>
+                <a href="contacts.html" class="footer__link">Контакты</a>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Контакты</h4>
+                <p class="footer__link">+7(961)843-88-03</p>
+                <p class="footer__link">kadrykalmykia@gmail.com</p>
+                <p class="footer__link">г. Элиста, ул.Пушкина, 52</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const res = await fetch('/api/employment-help');
+            const data = await res.json();
+
+            document.getElementById('helpCards').innerHTML = data.map(item => {
+                const stepItems = item.steps.map((s, i) =>
+                    `<li style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px">
+                        <span style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:${item.color};color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.8125rem;font-weight:700">${i + 1}</span>
+                        <span style="font-size:0.9375rem;line-height:1.5;color:var(--color-text)">${s}</span>
+                    </li>`
+                ).join('');
+
+                return `
+                <div style="background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius);overflow:hidden;transition:all 0.25s ease"
+                     onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='var(--shadow-lg)';this.style.borderColor='${item.color}'"
+                     onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--color-border)'">
+                    <div style="background:${item.color};padding:28px 32px;display:flex;align-items:center;gap:20px">
+                        <span style="font-size:3rem;flex-shrink:0">${item.icon}</span>
+                        <h2 style="color:#fff;font-size:1.5rem;font-weight:700;margin:0;line-height:1.3">${item.title}</h2>
+                    </div>
+                    <div style="padding:28px 32px">
+                        <p style="font-size:1rem;color:var(--color-text-secondary);line-height:1.7;margin:0 0 24px 0">
+                            ${item.description}
+                        </p>
+                        <h3 style="font-size:0.9375rem;font-weight:600;color:var(--color-text);margin:0 0 14px 0;text-transform:uppercase;letter-spacing:0.5px">
+                            Как это работает
+                        </h3>
+                        <ul style="list-style:none;padding:0;margin:0 0 24px 0">
+                            ${stepItems}
+                        </ul>
+                        <a href="${item.link_url}" target="_blank" rel="noopener"
+                           style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:${item.color};color:#fff;border-radius:var(--radius-sm);font-weight:500;font-size:0.9375rem;transition:all 0.2s ease"
+                           onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'"
+                           onmouseout="this.style.opacity='1';this.style.transform=''">
+                            ${item.link_text}
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        });
+    </script>
+</body>
+
+</html>

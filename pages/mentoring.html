@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наставничество — Кадровый центр здравоохранения РК</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../index.html" class="logo">
+                <span class="logo__icon">
+                    <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                </span>
+                <span class="logo__text">Кадровый центр</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="vacancies.html" class="nav__link">Вакансии</a>
+                <a href="organizations.html" class="nav__link">Организации</a>
+                <a href="press.html" class="nav__link">Пресс-служба</a>
+                <div class="nav__dropdown">
+                    <span class="nav__link nav__dropdown-toggle">Информация</span>
+                    <div class="nav__dropdown-menu">
+                        <a href="documents.html" class="nav__dropdown-item">Документы</a>
+                        <a href="employment-help.html" class="nav__dropdown-item">Помощь в трудоустройстве</a>
+                        <a href="target-training.html" class="nav__dropdown-item">Целевое обучение</a>
+                        <a href="zemstvo.html" class="nav__dropdown-item">Земский доктор</a>
+                        <a href="contacts.html" class="nav__dropdown-item">Контакты</a>
+                        <a href="mentoring.html" class="nav__dropdown-item">Наставничество</a>
+                    </div>
+                </div>
+                <a href="login.html" class="btn btn--outline nav__btn" id="authBtn">Войти</a>
+            </nav>
+            <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section__header">
+                    <h1 class="section__title">Наставничество</h1>
+                </div>
+
+                <div class="mentoring-info">
+                    <p class="mentoring-info__text">
+                        Согласно приказу Министерства здравоохранения Республики Калмыкия
+                        <strong>№479пр от 29.05.2026</strong> введено наставничество в медицинских
+                        учреждениях региона.
+                    </p>
+                    <p class="mentoring-info__text">
+                        Мы готовы предоставить всю необходимую помощь специалистам —
+                        от методической поддержки до персонального сопровождения
+                        опытными наставниками.
+                    </p>
+                </div>
+
+                <div class="mentoring-grid" id="mentoringList">
+                    <!-- Заполняется из JSON -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__col">
+                <div class="logo logo--footer">
+                    <span class="logo__icon">
+                        <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                    </span>
+                    <span class="logo__text">Кадровый центр</span>
+                </div>
+                <p class="footer__text">Кадровый центр здравоохранения<br>Республики Калмыкия</p>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Навигация</h4>
+                <a href="vacancies.html" class="footer__link">Вакансии</a>
+                <a href="organizations.html" class="footer__link">Организации</a>
+                <a href="documents.html" class="footer__link">Документы</a>
+                <a href="press.html" class="footer__link">Пресс-служба</a>
+                <a href="contacts.html" class="footer__link">Контакты</a>
+                <a href="mentoring.html" class="footer__link">Наставничество</a>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Контакты</h4>
+                <p class="footer__link">+7(961)843-88-03</p>
+                <p class="footer__link">kadrykalmykia@gmail.com</p>
+                <p class="footer__link">г. Элиста, ул.Пушкина, 52</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('mentoringList');
+            try {
+                const [mentRes, orgRes] = await Promise.all([
+                    fetch('/api/mentoring'),
+                    fetch('/api/organizations')
+                ]);
+                const mentoringOrgs = await mentRes.json();
+                const orgs = await orgRes.json();
+
+                if (!mentoringOrgs.length) {
+                    container.innerHTML = '<p style="color:var(--color-text-secondary);text-align:center;grid-column:1/-1">Пока нет организаций-наставников.</p>';
+                    return;
+                }
+
+                container.innerHTML = mentoringOrgs.map(m => {
+                    const org = orgs.find(o => o.id === m.organization_id);
+                    if (!org) return '';
+
+                    return `
+                    <div class="mentor-card">
+                        <div class="mentor-card__header">
+                            <div class="mentor-card__avatar">${org.short_name.split(' ').filter(w => w.length > 1).map(w => w[0]).join('').slice(0, 3)}</div>
+                            <div class="mentor-card__header-info">
+                                <h3 class="mentor-card__name">${org.short_name}</h3>
+                                <p class="mentor-card__specialty">${org.type}</p>
+                            </div>
+                        </div>
+                        <div class="mentor-card__body">
+                            <div class="mentor-card__stat">
+                                <span class="mentor-card__stat-value">${org.city}</span>
+                                <span class="mentor-card__stat-label">город</span>
+                            </div>
+                            <div class="mentor-card__stat">
+                                <span class="mentor-card__stat-value">${org.head_name}</span>
+                                <span class="mentor-card__stat-label">руководитель</span>
+                            </div>
+                            <p class="mentor-card__desc">${m.description}</p>
+                        </div>
+                    </div>
+                `}).join('');
+            } catch {
+                container.innerHTML = '<p style="color:var(--color-text-secondary);text-align:center;grid-column:1/-1">Не удалось загрузить данные.</p>';
+            }
+        });
+    </script>
+</body>
+
+</html>

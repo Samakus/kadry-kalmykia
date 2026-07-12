@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Целевое обучение — Кадровый центр здравоохранения РК</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../index.html" class="logo">
+                <span class="logo__icon">
+                    <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                </span>
+                <span class="logo__text">Кадровый центр</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="vacancies.html" class="nav__link">Вакансии</a>
+                <a href="organizations.html" class="nav__link">Организации</a>
+                <a href="press.html" class="nav__link">Пресс-служба</a>
+                <div class="nav__dropdown">
+                    <span class="nav__link nav__dropdown-toggle">Информация</span>
+                    <div class="nav__dropdown-menu">
+                        <a href="documents.html" class="nav__dropdown-item">Документы</a>
+                        <a href="employment-help.html" class="nav__dropdown-item">Помощь в трудоустройстве</a>
+                        <a href="target-training.html" class="nav__dropdown-item">Целевое обучение</a>
+                        <a href="zemstvo.html" class="nav__dropdown-item">Земский доктор</a>
+                        <a href="contacts.html" class="nav__dropdown-item">Контакты</a>
+                        <a href="mentoring.html" class="nav__dropdown-item">Наставничество</a>
+                    </div>
+                </div>
+                <a href="login.html" class="btn btn--outline nav__btn" id="authBtn">Войти</a>
+            </nav>
+            <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section__header">
+                    <h1 class="section__title">Целевое обучение</h1>
+                </div>
+
+                <!-- Описание -->
+                <div class="mentoring-info" style="margin-bottom:28px">
+                    <p style="font-size:1.0625rem;line-height:1.7;margin:0 0 10px 0">
+                        Целевое обучение — это возможность бесплатно получить высшее медицинское образование
+                        с гарантированным трудоустройством после выпуска. Абитуриенты поступают по отдельному
+                        конкурсу на бюджетные места, выделенные Министерством здравоохранения Республики Калмыкия.
+                    </p>
+                    <p style="font-size:0.9375rem;color:var(--color-text-secondary);line-height:1.6;margin:0">
+                        Контрольно-целевой приём (КЦП) Минздрава РК на 2026 год.
+                    </p>
+                </div>
+
+                <!-- Сводка КЦП -->
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:32px" id="summaryCards"></div>
+
+                <!-- Табы: Специалитет / Ординатура -->
+                <div style="display:flex;gap:8px;margin-bottom:24px" id="tabs">
+                    <button onclick="switchTab('specialitet')" id="tabSpecialitet" style="padding:12px 28px;border:none;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:600;font-size:0.9375rem;cursor:pointer;transition:0.2s">Специалитет</button>
+                    <button onclick="switchTab('ordinatura')" id="tabOrdinatura" style="padding:12px 28px;border:1px solid var(--color-border);background:var(--color-white);color:var(--color-text);border-radius:var(--radius-sm);font-weight:600;font-size:0.9375rem;cursor:pointer;transition:0.2s">Ординатура</button>
+                </div>
+
+                <!-- Таблица КЦП -->
+                <div id="kcpTable" style="margin-bottom:36px"></div>
+
+                <!-- Инструкция -->
+                <h2 style="font-size:1.375rem;font-weight:700;margin:0 0 8px 0" id="instructionTitle">Как подать документы — Специалитет</h2>
+                <p style="color:var(--color-text-secondary);font-size:0.9375rem;margin:0 0 20px 0" id="instructionDeadline"></p>
+                <div id="instructionSteps" style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px"></div>
+
+                <!-- Горячие линии -->
+                <div id="hotlinesBlock"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__col">
+                <div class="logo logo--footer">
+                    <span class="logo__icon">
+                        <img src="../img/logo.png" alt="Кадровый центр" width="50" height="50">
+                    </span>
+                    <span class="logo__text">Кадровый центр</span>
+                </div>
+                <p class="footer__text">Кадровый центр здравоохранения<br>Республики Калмыкия</p>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Навигация</h4>
+                <a href="vacancies.html" class="footer__link">Вакансии</a>
+                <a href="organizations.html" class="footer__link">Организации</a>
+                <a href="documents.html" class="footer__link">Документы</a>
+                <a href="press.html" class="footer__link">Пресс-служба</a>
+                <a href="contacts.html" class="footer__link">Контакты</a>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__heading">Контакты</h4>
+                <p class="footer__link">+7(961)843-88-03</p>
+                <p class="footer__link">kadrykalmykia@gmail.com</p>
+                <p class="footer__link">г. Элиста, ул.Пушкина, 52</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        let currentTab = 'specialitet';
+        let data = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const res = await fetch('/api/target-training');
+            data = await res.json();
+
+            // Сводная статистика
+            const specTotal = data.specialitet.reduce((s, i) => s + i.places, 0);
+            const ordTotal = data.ordinatura.reduce((s, i) => s + i.places, 0);
+
+            document.getElementById('summaryCards').innerHTML = [
+                { label: 'Всего мест', value: specTotal + ordTotal, color: '#1E5FDC' },
+                { label: 'Специалитет', value: specTotal, color: '#10B981' },
+                { label: 'Ординатура', value: ordTotal, color: '#E67E22' },
+                { label: 'Специальностей', value: data.specialitet.length + data.ordinatura.length, color: '#9B59B6' }
+            ].map(c => `
+                <div style="background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius);padding:20px;text-align:center;border-top:3px solid ${c.color}">
+                    <div style="font-size:1.75rem;font-weight:700;color:${c.color};margin-bottom:4px">${c.value}</div>
+                    <div style="font-size:0.8125rem;color:var(--color-text-secondary)">${c.label}</div>
+                </div>
+            `).join('');
+
+            switchTab('specialitet');
+        });
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.getElementById('tabSpecialitet').style.background = tab === 'specialitet' ? 'var(--color-primary)' : 'var(--color-white)';
+            document.getElementById('tabSpecialitet').style.color = tab === 'specialitet' ? '#fff' : 'var(--color-text)';
+            document.getElementById('tabSpecialitet').style.border = tab === 'specialitet' ? 'none' : '1px solid var(--color-border)';
+            document.getElementById('tabOrdinatura').style.background = tab === 'ordinatura' ? 'var(--color-primary)' : 'var(--color-white)';
+            document.getElementById('tabOrdinatura').style.color = tab === 'ordinatura' ? '#fff' : 'var(--color-text)';
+            document.getElementById('tabOrdinatura').style.border = tab === 'ordinatura' ? 'none' : '1px solid var(--color-border)';
+
+            renderTable();
+            renderInstructions();
+        }
+
+        function renderTable() {
+            const items = data[currentTab];
+            const isSpec = currentTab === 'specialitet';
+
+            const rows = items.map((item, idx) => `
+                <tr style="border-bottom:1px solid var(--color-border)">
+                    <td style="padding:10px 12px;font-weight:500">${idx + 1}</td>
+                    <td style="padding:10px 12px;font-weight:500">${item.specialty}</td>
+                    <td style="padding:10px 12px;text-align:center;font-weight:700;color:var(--color-primary)">${item.places}</td>
+                    <td style="padding:10px 12px;font-size:0.875rem;color:var(--color-text-secondary)">${isSpec ? item.university : (Array.isArray(item.universities) ? item.universities.join(', ') : item.universities)}</td>
+                    <td style="padding:10px 12px;font-size:0.875rem;font-weight:500">${isSpec ? item.workplace : (Array.isArray(item.workplaces) ? item.workplaces.join(', ') : item.workplaces)}</td>
+                    ${isSpec ? `<td style="padding:10px 12px;font-size:0.8125rem;color:var(--color-text-secondary)">${item.offer_number}</td>` : ''}
+                </tr>
+            `).join('');
+
+            document.getElementById('kcpTable').innerHTML = `
+                <div style="overflow-x:auto;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius)">
+                    <table style="width:100%;border-collapse:collapse">
+                        <thead>
+                            <tr style="background:var(--color-primary);color:#fff">
+                                <th style="padding:14px 12px;text-align:left;font-weight:600;font-size:0.875rem">№</th>
+                                <th style="padding:14px 12px;text-align:left;font-weight:600;font-size:0.875rem">Специальность</th>
+                                <th style="padding:14px 12px;text-align:center;font-weight:600;font-size:0.875rem">Мест</th>
+                                <th style="padding:14px 12px;text-align:left;font-weight:600;font-size:0.875rem">${isSpec ? 'Образовательная организация' : 'Вузы'}</th>
+                                <th style="padding:14px 12px;text-align:left;font-weight:600;font-size:0.875rem">${isSpec ? 'Место трудоустройства' : 'Место отработки'}</th>
+                                ${isSpec ? '<th style="padding:14px 12px;text-align:left;font-weight:600;font-size:0.875rem">№ предложения</th>' : ''}
+                            </tr>
+                        </thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                </div>
+                <p style="margin-top:12px;font-size:0.8125rem;color:var(--color-text-secondary);text-align:right">
+                    Итого: ${items.length} специальностей, ${items.reduce((s, i) => s + i.places, 0)} мест
+                </p>
+            `;
+        }
+
+        function renderInstructions() {
+            const inst = data.instructions[currentTab];
+            const isSpec = currentTab === 'specialitet';
+
+            document.getElementById('instructionTitle').textContent = 'Как подать документы — ' + (isSpec ? 'Специалитет' : 'Ординатура');
+            document.getElementById('instructionDeadline').textContent = isSpec ? data.instructions.specialitet_deadline : data.instructions.ordinatura_deadline;
+
+            document.getElementById('instructionSteps').innerHTML = inst.map(s => `
+                <div style="display:flex;align-items:flex-start;gap:16px;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:18px 22px;transition:0.2s"
+                     onmouseover="this.style.borderColor='var(--color-primary)';this.style.boxShadow='var(--shadow-md)'"
+                     onmouseout="this.style.borderColor='var(--color-border)';this.style.boxShadow=''">
+                    <div style="flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--color-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9375rem">${s.step}</div>
+                    <div style="font-size:0.9375rem;line-height:1.55;padding-top:6px">${s.text}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('hotlinesBlock').innerHTML = `
+                <h3 style="font-size:1.0625rem;font-weight:600;margin:0 0 14px 0">Горячие линии</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:16px">
+                    ${data.instructions.hotlines.map(h => `
+                        <div style="background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:16px 22px;flex:1;min-width:220px">
+                            <p style="font-size:0.8125rem;color:var(--color-text-secondary);margin:0 0 4px 0">${h.name}</p>
+                            <p style="font-size:1.125rem;font-weight:700;color:var(--color-primary);margin:0">${h.phone}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>
