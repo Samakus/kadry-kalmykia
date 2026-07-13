@@ -52,9 +52,41 @@ function renderNews(newsList) {
                 </div>
             ` : ''}
 
+            ${news.image ? `
+                <div class="news-article__image">
+                    <img src="${news.image}" alt="${news.title}" style="width:100%;max-width:720px;border-radius:12px;">
+                </div>
+            ` : ''}
+
             <div class="news-article__text">
-                ${news.text.map(p => `<p>${p}</p>`).join('')}
+                ${renderTextBlocks(news.text)}
             </div>
         </article>
     `).join('');
+}
+
+function renderTextBlocks(textArray) {
+    let html = '';
+    let i = 0;
+
+    while (i < textArray.length) {
+        const line = textArray[i].trimEnd();
+        const isListItem = line.endsWith(';');
+
+        if (isListItem) {
+            const items = [];
+            while (i < textArray.length) {
+                const item = textArray[i].trimEnd();
+                if (!item.endsWith(';')) break;
+                items.push(item.replace(/;$/, '').trim());
+                i++;
+            }
+            html += '<ul>' + items.map(item => `<li>${item}</li>`).join('') + '</ul>';
+        } else {
+            html += `<p>${textArray[i]}</p>`;
+            i++;
+        }
+    }
+
+    return html;
 }
