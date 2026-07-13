@@ -57,12 +57,6 @@ function renderNews(newsList) {
                 </div>
             ` : ''}
 
-            ${news.image ? `
-                <div class="news-article__image">
-                    <img src="${news.image}" alt="${news.title}" style="width:100%;max-width:720px;border-radius:12px;">
-                </div>
-            ` : ''}
-
             <div class="news-article__text">
                 ${renderTextBlocks(news.text)}
             </div>
