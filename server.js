@@ -244,7 +244,7 @@ app.get('/api/vacancies/my', (req, res) => {
 
 // Создать вакансию
 app.post('/api/vacancies', (req, res) => {
-    let { title, specialization, salary, conditions, requirements, contact_phone, contact_email, organization_id, created_by_user_id } = req.body;
+    let { title, specialization, salary, slots, conditions, requirements, contact_phone, contact_email, organization_id, created_by_user_id } = req.body;
 
     if (!title || !specialization || !salary) {
         return res.status(400).json({ error: 'Название, специализация и зарплата обязательны' });
@@ -254,6 +254,7 @@ app.post('/api/vacancies', (req, res) => {
     title = escapeHtml(title);
     specialization = escapeHtml(specialization);
     salary = escapeHtml(salary);
+    const slotsNum = parseInt(slots, 10) || 1;
     conditions = conditions ? escapeHtml(conditions) : '';
     requirements = requirements ? escapeHtml(requirements) : '';
     contact_phone = contact_phone ? escapeHtml(contact_phone) : '';
@@ -266,6 +267,7 @@ app.post('/api/vacancies', (req, res) => {
         title,
         specialization,
         salary,
+        slots: slotsNum < 1 ? 1 : slotsNum,
         conditions,
         requirements,
         contact_phone,
@@ -298,6 +300,10 @@ app.put('/api/vacancies/:id', (req, res) => {
     if (updates.requirements) updates.requirements = escapeHtml(updates.requirements);
     if (updates.contact_phone) updates.contact_phone = escapeHtml(updates.contact_phone);
     if (updates.contact_email) updates.contact_email = escapeHtml(updates.contact_email);
+    if (updates.slots !== undefined) {
+        const slotsNum = parseInt(updates.slots, 10) || 1;
+        updates.slots = slotsNum < 1 ? 1 : slotsNum;
+    }
 
     vacancies[index] = { ...vacancies[index], ...updates };
     writeJSON('vacancies.json', vacancies);

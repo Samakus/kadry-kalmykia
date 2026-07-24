@@ -72,6 +72,7 @@ function openVacancyModal(vacancy = null) {
         document.getElementById('vacancyTitle').value = vacancy.title;
         document.getElementById('vacancySpecialization').value = vacancy.specialization;
         document.getElementById('vacancySalary').value = vacancy.salary;
+        document.getElementById('vacancySlots').value = vacancy.slots || 1;
         document.getElementById('vacancyConditions').value = vacancy.conditions;
         document.getElementById('vacancyRequirements').value = vacancy.requirements;
         document.getElementById('vacancyPhone').value = vacancy.contact_phone;
@@ -92,12 +93,14 @@ function closeVacancyModal() {
 
 function saveVacancy() {
     const id = document.getElementById('vacancyId').value;
+    const slotsValue = parseInt(document.getElementById('vacancySlots').value, 10) || 1;
     const vacancy = {
         id: id || 'vac_' + Date.now(),
         organization_id: currentUser.organization_id,
         title: document.getElementById('vacancyTitle').value.trim(),
         specialization: document.getElementById('vacancySpecialization').value.trim(),
         salary: document.getElementById('vacancySalary').value.trim(),
+        slots: slotsValue < 1 ? 1 : slotsValue,
         conditions: document.getElementById('vacancyConditions').value.trim(),
         requirements: document.getElementById('vacancyRequirements').value.trim(),
         contact_phone: document.getElementById('vacancyPhone').value.trim(),
@@ -157,7 +160,7 @@ function renderMyVacancies() {
         <div class="resume-card">
             <div class="resume-card__info">
                 <div class="resume-card__specialization">${v.title}</div>
-                <div class="resume-card__meta">${v.specialization} • ${v.salary}</div>
+                <div class="resume-card__meta">${v.specialization} • ${v.salary} • ${v.slots || 1} став${(v.slots || 1) === 1 ? 'ка' : (v.slots || 1) < 5 ? 'ки' : 'ок'}</div>
                 <div class="resume-card__meta">${v.conditions}</div>
                 <span class="resume-card__status ${v.is_active ? 'resume-card__status--public' : 'resume-card__status--hidden'}">
                     ${v.is_active ? 'Активна' : 'Снята с публикации'}

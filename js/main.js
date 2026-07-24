@@ -21,8 +21,9 @@ async function loadVacancies() {
 
         const activeVacancies = vacancies.filter(v => v.is_active);
 
-        // Обновляем счетчик
-        document.getElementById('vacanciesCount').textContent = activeVacancies.length;
+        // Обновляем счетчик: сумма ставок
+        const totalSlots = activeVacancies.reduce((sum, v) => sum + (v.slots || 1), 0);
+        document.getElementById('vacanciesCount').textContent = totalSlots;
 
         // Выводим последние 4
         const latest = activeVacancies.slice(0, 4);
@@ -38,6 +39,7 @@ async function loadVacancies() {
                     <div class="vacancy-card__meta">
                         ${v.specialization ? `<span class="vacancy-card__tag">${v.specialization}</span>` : ''}
                         ${org ? `<span class="vacancy-card__tag">${org.city}</span>` : ''}
+                        <span class="vacancy-card__tag">${v.slots || 1} став${(v.slots || 1) === 1 ? 'ка' : (v.slots || 1) < 5 ? 'ки' : 'ок'}</span>
                     </div>
                     <a href="pages/vacancies.html?id=${v.id}" class="vacancy-card__link">
                         Подробнее

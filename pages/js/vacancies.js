@@ -88,6 +88,7 @@ function renderVacancies(vacancies) {
                 <div class="vacancy-card__meta">
                     ${v.specialization ? `<span class="vacancy-card__tag">${v.specialization}</span>` : ''}
                     ${org ? `<span class="vacancy-card__tag">${org.city}</span>` : ''}
+                    <span class="vacancy-card__tag">${v.slots || 1} став${(v.slots || 1) === 1 ? 'ка' : (v.slots || 1) < 5 ? 'ки' : 'ок'}</span>
                 </div>
                 <p style="font-size:0.875rem;color:var(--color-text-secondary);">${v.requirements}</p>
                 <p style="font-size:0.8125rem;color:var(--color-text-secondary);">
